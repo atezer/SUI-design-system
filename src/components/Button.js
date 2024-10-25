@@ -1,22 +1,45 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import "./ButtonStyles.css"; // Assuming a CSS file for button styles
 
-const StyledButton = styled.button`
-  background-color: #007bff;
-  color: white;
-  padding: 10px 20px;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  font-size: 16px;
+// Button types and styles based on the screenshot
+const buttonVariants = [
+  { label: "Primary", className: "btn-primary" },
+  { label: "Secondary", className: "btn-secondary" },
+  { label: "Success", className: "btn-success" },
+  { label: "Danger", className: "btn-danger" },
+  { label: "Warning", className: "btn-warning" },
+  { label: "Info", className: "btn-info" },
+  { label: "Light", className: "btn-light" },
+  { label: "Dark", className: "btn-dark" },
+];
 
-  &:hover {
-    background-color: #0056b3;
-  }
-`;
+const buttonSizes = ["small", "medium", "large"];
 
-const Button = ({ children }) => {
-  return <StyledButton>{children}</StyledButton>;
+export const TypeButtonStyle = () => {
+  return (
+    <div className="button-grid">
+      {buttonVariants.map((variant) => (
+        <div key={variant.label} className="button-row">
+          {buttonSizes.map((size) => (
+            <Button
+              key={size}
+              className={`${variant.className} btn-${size}`}
+              aria-label={`${variant.label} ${size} button`}
+            >
+              Button
+            </Button>
+          ))}
+          {buttonSizes.map((size) => (
+            <Button
+              key={`${size}-icon`}
+              className={`${variant.className} btn-${size} btn-icon`}
+              aria-label={`${variant.label} ${size} icon button`}
+            >
+              +
+            </Button>
+          ))}
+        </div>
+      ))}
+    </div>
+  );
 };
-
-export default Button;
